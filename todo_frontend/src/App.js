@@ -1,48 +1,102 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import "./todo_design_system.css";
+import TodoPage from "./components/TodoPage";
+import AddEditTodoPage from "./components/AddEditTodoPage";
+
+// Minimal route-state logic for SPA navigation:
+const PAGE = {
+  TODO_LIST: "TODO_LIST",
+  ADD: "ADD",
+  EDIT: "EDIT",
+};
 
 // PUBLIC_INTERFACE
 function App() {
-  const [theme, setTheme] = useState('light');
+  const [todos, setTodos] = useState(() => {
+    // LocalStorage for basic persistence
+    let data = localStorage.getItem("todos_app_v1");
+    return data ? JSON.parse(data) : [];
+  });
 
-  // Effect to apply theme to document element
+  const [route, setRoute] = useState(PAGE.TODO_LIST);
+
+  const [editingTodo, setEditingTodo] = useState(null);
+
+  // Sync to localStorage
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
+    localStorage.setItem("todos_app_v1", JSON.stringify(todos));
+  }, [todos]);
 
+  // Routing logic for Add/Edit/Back
+  const goToAdd = () => {
+    setEditingTodo(null);
+    setRoute(PAGE.ADD);
+  };
+  const goToEdit = (todo) => {
+    setEditingTodo(todo);
+    setRoute(PAGE.EDIT);
+  };
+  const goBack = () => setRoute(PAGE.TODO_LIST);
+
+  // CRUD Operations
   // PUBLIC_INTERFACE
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+  const addTodo = (todo) => {
+    setTodos((prev) => [
+      ...prev,
+      {
+        ...todo,
+        id: Date.now().toString(),
+        completed: false,
+      },
+    ]);
+    setRoute(PAGE.TODO_LIST);
+  };
+  // PUBLIC_INTERFACE
+  const updateTodo = (id, newData) => {
+    setTodos((prev) =>
+      prev.map((t) =>
+        t.id === id ? { ...t, ...newData } : t
+      )
+    );
+    setRoute(PAGE.TODO_LIST);
+  };
+  // PUBLIC_INTERFACE
+  const deleteTodo = (id) => {
+    setTodos((prev) => prev.filter((t) => t.id !== id));
+  };
+  // PUBLIC_INTERFACE
+  const toggleComplete = (id) => {
+    setTodos((prev) =>
+      prev.map((t) =>
+        t.id === id ? { ...t, completed: !t.completed } : t
+      )
+    );
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <button 
-          className="theme-toggle" 
-          onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-        </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Current theme: <strong>{theme}</strong>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {route === PAGE.TODO_LIST && (
+        <TodoPage
+          todos={todos}
+          onAdd={goToAdd}
+          onEdit={goToEdit}
+          onDelete={deleteTodo}
+          onToggleComplete={toggleComplete}
+        />
+      )}
+      {(route === PAGE.ADD || route === PAGE.EDIT) && (
+        <AddEditTodoPage
+          onBack={goBack}
+          onSave={
+            route === PAGE.ADD
+              ? addTodo
+              : (todo) => updateTodo(editingTodo.id, todo)
+          }
+          initial={route === PAGE.EDIT ? editingTodo : null}
+        />
+      )}
+    </>
   );
 }
 
