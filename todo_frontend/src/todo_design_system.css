@@ -1,0 +1,352 @@
+:root {
+  /* Colors */
+  --color-ffffff: #ffffff;
+  --color-d6d7ef: #d6d7ef;
+  --color-9395d3: #9395d3;
+  --color-8b8787: #8b8787;
+  --color-000000: #000000;
+  --color-d1d1d6: #d1d1d6;
+  --color-ebebf5: #ebebf5;
+  --color-34c759: #34c759;
+  --color-ffd60a: #ffd60a;
+  --color-b3b7ee: #b3b7ee;
+}
+
+/* Typography */
+.typo-6 {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 14.45px;
+  letter-spacing: 0;
+  color: var(--color-9395d3);
+  text-align: left;
+}
+.typo-7 {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 14.45px;
+  letter-spacing: 0;
+  color: var(--color-8b8787);
+  text-align: left;
+}
+.typo-8 {
+  font-family: 'Jost', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 34.68px;
+  color: var(--color-ffffff);
+  letter-spacing: 0;
+  text-align: left;
+}
+.typo-9 {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 18.785px;
+  color: var(--color-9395d3);
+  letter-spacing: 0;
+  text-align: left;
+}
+.typo-10 {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 14.45px;
+  color: var(--color-000000);
+  letter-spacing: 0;
+  text-align: left;
+}
+.typo-11 {
+  font-family: 'Jost', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 23.12px;
+  color: var(--color-8b8787);
+  letter-spacing: 0;
+  text-align: left;
+}
+.typo-12 {
+  font-family: 'Jost', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28.9px;
+  color: var(--color-ffffff);
+  letter-spacing: 0;
+  text-align: left;
+}
+/* ... (additional typographies as tokens if needed) */
+
+/* Spacings and radii */
+:root {
+  --radius-1: 1px;
+  --radius-15: 15px;
+  --radius-20: 20px;
+  --shadow-0: 0px 4px 4px 0px #00000030;
+}
+
+/* Screen: TODO PAGE */
+
+body, html {
+  background: var(--color-ffffff);
+  margin: 0;
+  padding: 0;
+  font-family: 'Jost', sans-serif;
+}
+
+.todo-app-root {
+  width: 414px;
+  min-height: 896px;
+  margin: auto;
+  background: var(--color-ffffff);
+  position: relative;
+  overflow-x: hidden;
+}
+
+.status-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 429px;
+  height: 44px;
+  z-index: 100;
+}
+
+.app-bar {
+  width: 414px;
+  height: 118px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--color-9395d3);
+}
+
+.app-bar-title {
+  position: absolute;
+  top: 60px;
+  left: 16px;
+  width: 131px;
+  height: 35px;
+}
+
+.app-bar-title-text {
+  font-family: 'Jost', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 35px;
+  color: var(--color-ffffff);
+}
+
+.app-bar-calendar {
+  position: absolute;
+  top: 30px;
+  right: 18px;
+  width: 60px;
+  height: 60px;
+}
+
+.nav-bar {
+  width: 414px;
+  height: 68px;
+  position: absolute;
+  left: 0;
+  top: 118px;
+  background: var(--color-ffffff);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-btn {
+  width: 30px;
+  height: 30px;
+  margin: 0 24px;
+}
+.nav-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.todos-section {
+  position: absolute;
+  top: 200px;
+  left: 7px;
+  width: 400px;
+  /* Height: dynamic depending on todo items */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Todo list items */
+.todo-card {
+  width: 400px;
+  height: 82px;
+  background: var(--color-ffffff);
+  border-radius: var(--radius-15);
+  box-shadow: var(--shadow-0);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  position: relative;
+  padding: 0 24px;
+  gap: 16px;
+}
+.todo-card-titles {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 140px;
+}
+.todo-title {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-9395d3);
+}
+.todo-subtitle {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--color-000000);
+}
+
+/* Icons in todo-card */
+.todo-icon-btn {
+  width: 25px;
+  height: 25px;
+  border: none;
+  background: transparent;
+  margin-left: 6px;
+  cursor: pointer;
+}
+
+/* Add todo floating button */
+.add-todo-btn {
+  position: fixed;
+  bottom: 55px;
+  right: 32px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: var(--color-9395d3);
+  box-shadow: var(--shadow-0);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 90;
+}
+.add-todo-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--color-ffffff);
+}
+
+@media (max-width: 470px) {
+  .todo-app-root {
+    width: 100vw;
+    min-width: 100vw;
+  }
+  .todos-section, .todo-card {
+    width: 94vw;
+    min-width: 94vw;
+  }
+}
+
+/* ADD TODO PAGE */
+
+.add-todo-root {
+  width: 414px;
+  min-height: 896px;
+  margin: auto;
+  background: var(--color-ffffff);
+  position: relative;
+  overflow-x: hidden;
+}
+
+.add-page-app-bar {
+  width: 414px;
+  height: 118px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--color-9395d3);
+}
+
+.add-page-titlebox {
+  position: absolute;
+  top: 62px;
+  left: 32px;
+  height: 35px;
+}
+
+.add-page-title-text {
+  font-family: 'Jost', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 35px;
+  color: var(--color-ffffff);
+}
+
+.input-group {
+  position: relative;
+  width: 356px;
+  margin: 0 auto;
+  margin-top: 32px;
+}
+.input-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-8b8787);
+  margin-bottom: 2px;
+  display: block;
+}
+
+.input-underline {
+  width: 100%;
+  height: 1px;
+  background: var(--color-8b8787);
+  border: none;
+  margin: 4px 0 18px 0;
+}
+input[type="text"], textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-family: 'Jost', sans-serif;
+  font-size: 16px;
+  padding: 2px;
+  margin-bottom: 0;
+}
+
+/* Add todo button in Add screen */
+.add-task-btn {
+  display: block;
+  width: 386px;
+  height: 65px;
+  background: var(--color-9395d3);
+  border-radius: var(--radius-15);
+  color: var(--color-ffffff);
+  font-size: 20px;
+  font-weight: 600;
+  border: none;
+  margin: 40px auto 0 auto;
+  box-shadow: var(--shadow-0);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.add-task-btn:hover {
+  background: var(--color-8b8787);
+}
+
+::-webkit-input-placeholder { color: var(--color-8b8787); opacity: 1; }
+::-moz-placeholder { color: var(--color-8b8787); opacity: 1; }
+:-ms-input-placeholder { color: var(--color-8b8787); opacity: 1; }
+::placeholder { color: var(--color-8b8787); opacity: 1; }
+
